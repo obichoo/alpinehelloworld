@@ -18,7 +18,8 @@ pipeline {
                    #!/bin/bash
                     # Nettoyer le répertoire s'il existe déjà
                         rm -rf ${IMAGE_NAME}
-                    
+                    docker stop ${IMAGE_NAME}
+                 docker rm ${IMAGE_NAME}
                     
                     # Cloner le dépôt
                     git clone https://github.com/${Votre_ID_GIT}/${IMAGE_NAME}.git
