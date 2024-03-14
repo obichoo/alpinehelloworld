@@ -4,7 +4,7 @@ pipeline {
        Votre_ID_GIT = "obichoo"
        IMAGE_NAME = "alpinehelloworld"
        IMAGE_TAG = "latest"
-       PORT_EXPOSED = "8080"
+       PORT_EXPOSED = "5000"
        STAGING = "${votre_id_dockerhub}-staging"
        PRODUCTION = "${votre_id_dockerhub}-production"
      }
