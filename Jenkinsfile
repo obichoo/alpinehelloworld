@@ -17,9 +17,8 @@ pipeline {
                   sh '''
                    #!/bin/bash
                     # Nettoyer le répertoire s'il existe déjà
-                    if [ -d "${IMAGE_NAME}" ]; then
                         rm -rf ${IMAGE_NAME}
-                    fi
+                    
                     
                     # Cloner le dépôt
                     git clone https://github.com/${Votre_ID_GIT}/${IMAGE_NAME}.git
