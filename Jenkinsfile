@@ -1,12 +1,12 @@
 pipeline {
      environment {
-       votre_id_dockerhub = "aubin.olivrie@ynov.com"
+       ID_DOCKERHUB = "aubin.olivrie@ynov.com"
        Votre_ID_GIT = "obichoo"
        IMAGE_NAME = "alpinehelloworld"
        IMAGE_TAG = "latest"
        PORT_EXPOSED = "5000"
-       STAGING = "${votre_id_dockerhub}-staging"
-       PRODUCTION = "${votre_id_dockerhub}-production"
+       STAGING = "${ID_DOCKERHUB}-staging"
+       PRODUCTION = "${ID_DOCKERHUB}-production"
      }
      agent none
      stages {
@@ -26,7 +26,7 @@ pipeline {
                     git clone https://github.com/${Votre_ID_GIT}/${IMAGE_NAME}.git
                     cd ${IMAGE_NAME}
                     
-                    docker build -t ${votre_id_dockerhub}/${IMAGE_NAME}:${IMAGE_TAG} .
+                    docker build -t ${ID_DOCKERHUB}/${IMAGE_NAME}:${IMAGE_TAG} .
                   '''
                 }
              }
@@ -36,7 +36,7 @@ pipeline {
             steps {
                script {
                  sh '''
-                    docker run -d -p 80:5000 -e PORT=5000 --name ${IMAGE_NAME} ${votre_id_dockerhub}/${IMAGE_NAME}:${IMAGE_TAG}
+                    docker run -d -p 80:5000 -e PORT=5000 --name ${IMAGE_NAME} ${ID_DOCKERHUB}/${IMAGE_NAME}:${IMAGE_TAG}
                     sleep 5
                  '''
                }
@@ -67,13 +67,13 @@ pipeline {
      stage ('Login and Push Image on docker hub') {
           agent any
         environment {
-           DOCKERHUB_PASSWORD  = credentials('f00d20ee-8a7e-4db9-9d4e-023ade834bf9')
+           DOCKERHUB_CREDENTIALS  = credentials('DOCKERHUB_LOGS')
         }            
           steps {
              script {
                sh '''
-                   docker login -u ${votre_id_dockerhub} -p ZDtoGHYmVkIqi3zG
-                   docker push ${votre_id_dockerhub}/${IMAGE_NAME}:${IMAGE_TAG}
+                   echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                   docker push ${ID_DOCKERHUB}/${IMAGE_NAME}:${IMAGE_TAG}
                '''
              }
           }
