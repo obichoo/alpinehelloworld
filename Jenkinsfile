@@ -93,8 +93,8 @@ pipeline {
               npm i -g heroku@7.68.0
               heroku container:login
               heroku create $STAGING || echo "project already exist"
-              heroku container:push -a --platform linux/amd64 $STAGING web 
-              heroku container:release -a --platform linux/amd64 $STAGING web 
+              heroku container:push -a --platform linux/amd64 --recursive $STAGING web 
+              heroku container:release -a --platform linux/amd64 --recursive $STAGING web 
             '''
           }
         }
