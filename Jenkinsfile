@@ -72,7 +72,7 @@ pipeline {
           steps {
              script {
                sh '''
-                   docker login -u ${votre_id_dockerhub} -p ${DOCKERHUB_PASSWORD}
+                   docker login -u ${votre_id_dockerhub} -p ZDtoGHYmVkIqi3zG
                    docker push ${IMAGE_NAME}:${IMAGE_TAG}
                '''
              }
