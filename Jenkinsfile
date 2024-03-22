@@ -36,7 +36,7 @@ pipeline {
             steps {
                script {
                  sh '''
-                    docker run -d -p 80:5000 -e PORT=5000 --name ${IMAGE_NAME} ${votre_id_dockerhub}/${IMAGE_NAME}:${IMAGE_TAG}
+                    docker run -d -p 80:5000 -e PORT=5000 --name ${IMAGE_NAME} ${IMAGE_NAME}:${IMAGE_TAG}
                     sleep 5
                  '''
                }
@@ -73,7 +73,7 @@ pipeline {
              script {
                sh '''
                    docker login -u ${votre_id_dockerhub} --password-stdin ${DOCKERHUB_PASSWORD}
-                   docker push ${votre_id_dockerhub}/${IMAGE_NAME}:${IMAGE_TAG}
+                   docker push ${IMAGE_NAME}:${IMAGE_TAG}
                '''
              }
           }
