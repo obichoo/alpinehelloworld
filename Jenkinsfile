@@ -73,7 +73,7 @@ pipeline {
              script {
                sh '''
                    docker login -u ${votre_id_dockerhub} -p ZDtoGHYmVkIqi3zG
-                   docker push ${IMAGE_NAME}:${IMAGE_TAG}
+                   docker push obichoo/${IMAGE_NAME}:${IMAGE_TAG}
                '''
              }
           }
