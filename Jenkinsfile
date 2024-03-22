@@ -19,8 +19,6 @@ pipeline {
                     # Nettoyer le répertoire s'il existe déjà
                     if [ -d "${IMAGE_NAME}" ]; then
                         rm -rf ${IMAGE_NAME}
-                        docker stop ${IMAGE_NAME}
-                        docker rm ${IMAGE_NAME}
                     fi
 
                     
