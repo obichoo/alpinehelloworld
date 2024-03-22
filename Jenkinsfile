@@ -1,6 +1,6 @@
 pipeline {
      environment {
-       votre_id_dockerhub = "obichooooo"
+       votre_id_dockerhub = "aubin.olivrie@ynov.com"
        Votre_ID_GIT = "obichoo"
        IMAGE_NAME = "alpinehelloworld"
        IMAGE_TAG = "latest"
@@ -74,7 +74,7 @@ pipeline {
           steps {
              script {
                sh '''
-                   echo ${DOCKERHUB_PASSWORD} | docker login -u ${votre_id_dockerhub} --password-stdin
+                   docker login -u ${votre_id_dockerhub} --password-stdin ${DOCKERHUB_PASSWORD}
                    docker push ${votre_id_dockerhub}/${IMAGE_NAME}:${IMAGE_TAG}
                '''
              }
