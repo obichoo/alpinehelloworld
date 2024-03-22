@@ -1,7 +1,7 @@
 pipeline {
      environment {
-       ID_DOCKERHUB = "aubin.olivrie@ynov.com"
-       Votre_ID_GIT = "obichoo"
+       ID_DOCKERHUB = "obichooooo"
+       ID_GIT = "obichoo"
        IMAGE_NAME = "alpinehelloworld"
        IMAGE_TAG = "latest"
        PORT_EXPOSED = "5000"
@@ -23,7 +23,7 @@ pipeline {
 
                     
                     # Cloner le dépôt
-                    git clone https://github.com/${Votre_ID_GIT}/${IMAGE_NAME}.git
+                    git clone https://github.com/${ID_GIT}/${IMAGE_NAME}.git
                     cd ${IMAGE_NAME}
                     
                     docker build -t ${ID_DOCKERHUB}/${IMAGE_NAME}:${IMAGE_TAG} .
