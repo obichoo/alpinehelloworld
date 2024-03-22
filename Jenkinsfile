@@ -26,7 +26,7 @@ pipeline {
                     git clone https://github.com/${ID_GIT}/${IMAGE_NAME}.git
                     cd ${IMAGE_NAME}
                     
-                    docker build -t ${ID_DOCKERHUB}/${IMAGE_NAME}:${IMAGE_TAG} .
+                    docker build --platform linux/amd64 -t ${ID_DOCKERHUB}/${IMAGE_NAME}:${IMAGE_TAG} .
                   '''
                 }
              }
