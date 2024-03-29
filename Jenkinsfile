@@ -121,6 +121,7 @@ pipeline {
     // }
 
     stage('Load Groovy File') {
+      agent any
       steps {
         script {
           def groovyScript = load 'post_initial.groovy'
