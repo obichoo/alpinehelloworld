@@ -1,5 +1,6 @@
 pipeline {
   environment {
+    PROD_APP_ENDPOINT = "https://obichooooo-staging-b1f04106fc86.herokuapp.com/"
     ID_DOCKERHUB = 'obichooooo'
     ID_GIT = 'obichoo'
     IMAGE_NAME = 'alpinehelloworld'
