@@ -10,26 +10,26 @@ pipeline {
   }
   agent none
   stages {
-    // stage('Build image') {
-    //   agent any
-    //   steps {
-    //     script {
-    //       sh '''
-    //                #!/bin/bash
-    //                 # Nettoyer le répertoire s'il existe déjà
-    //                 if [ -d "${IMAGE_NAME}" ]; then
-    //                     rm -rf ${IMAGE_NAME}
-    //                 fi
+    stage('Build image') {
+      agent any
+      steps {
+        script {
+          sh '''
+                   #!/bin/bash
+                    # Nettoyer le répertoire s'il existe déjà
+                    if [ -d "${IMAGE_NAME}" ]; then
+                        rm -rf ${IMAGE_NAME}
+                    fi
 
-    //                 # Cloner le dépôt
-    //                 git clone https://github.com/${ID_GIT}/${IMAGE_NAME}.git
-    //                 cd ${IMAGE_NAME}
+                    # Cloner le dépôt
+                    git clone https://github.com/${ID_GIT}/${IMAGE_NAME}.git
+                    cd ${IMAGE_NAME}
 
-    //                 docker build -t ${ID_DOCKERHUB}/${IMAGE_NAME}:${IMAGE_TAG} --platform linux/amd64 .
-    //               '''
-    //     }
-    //   }
-    // }
+                    docker build -t ${ID_DOCKERHUB}/${IMAGE_NAME}:${IMAGE_TAG} --platform linux/amd64 .
+                  '''
+        }
+      }
+    }
     //     stage('Run container based on builded image') {
     //   agent any
     //   steps {
