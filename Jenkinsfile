@@ -119,17 +119,14 @@ pipeline {
   //       }
   //   }
   // }
-
-    stage('Notify') {
-      agent any
-      post {
-        success {
-          slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - PROD URL => http://${PRODUCTION}.herokuapp.com , STAGING URL => http://${STAGING}.herokuapp.com")
-        }
-        failure {
-          slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-        }
-      }
-    }
   }
+  // Post notification using post_initial.groovy file
+  post {
+       success {
+         slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - PROD URL => http://${PROD_APP_ENDPOINT} , STAGING URL => http://${STG_APP_ENDPOINT}")
+         }
+      failure {
+            slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          }   
+    }  
 }
