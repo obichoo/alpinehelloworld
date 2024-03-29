@@ -99,39 +99,37 @@ pipeline {
     //   }
     // }
 
-    // stage('Push image in production and deploy it') {
-    //   when {
-    //     expression { GIT_BRANCH == 'origin/production' }
-    //   }
-    //   agent any
-    //   environment {
-    //       HEROKU_API_KEY = credentials('heroku_api_key')
-    //   }
-    //   steps {
-    //       script {
-    //         sh '''
-    //           npm i -g heroku@7.68.0
-    //           heroku container:login
-    //           heroku create $PRODUCTION || echo "project already exist"
-    //           heroku container:push -a $PRODUCTION web
-    //           heroku container:release -a $PRODUCTION web
-    //         '''
-    //       }
-    //   }
-    // }
+  // stage('Push image in production and deploy it') {
+  //   when {
+  //     expression { GIT_BRANCH == 'origin/production' }
+  //   }
+  //   agent any
+  //   environment {
+  //       HEROKU_API_KEY = credentials('heroku_api_key')
+  //   }
+  //   steps {
+  //       script {
+  //         sh '''
+  //           npm i -g heroku@7.68.0
+  //           heroku container:login
+  //           heroku create $PRODUCTION || echo "project already exist"
+  //           heroku container:push -a $PRODUCTION web
+  //           heroku container:release -a $PRODUCTION web
+  //         '''
+  //       }
+  //   }
+  // }
 
-    
-    stage('Send Slack notification') {
-      steps {
-        post {
-      success {
-        slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - PROD URL => http://${PROD_APP_ENDPOINT} , STAGING URL => http://${STG_APP_ENDPOINT}")
+    stage('Notify') {
+      agent any
+      post {
+        success {
+          slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - PROD URL => http://${PRODUCTION}.herokuapp.com , STAGING URL => http://${STAGING}.herokuapp.com")
+        }
+        failure {
+          slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        }
       }
-      failure {
-        slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-      }
-      }
-    }}
-  
+    }
   }
 }
