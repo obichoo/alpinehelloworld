@@ -1,3 +1,4 @@
+@Library('shared-library')_
 pipeline {
   environment {
     PROD_APP_ENDPOINT = "https://obichooooo-staging-b1f04106fc86.herokuapp.com/"
@@ -122,13 +123,11 @@ pipeline {
       }
     }
   }
-  // Post notification using post_initial.groovy file
   post {
-    success {
-      slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - PROD URL => http://${PROD_APP_ENDPOINT} , STAGING URL => http://${STG_APP_ENDPOINT}")
-    }
-      failure {
-      slackSend(color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+    always {
+      script {
+        slackNotifier currentBuild.result
       }
+    }  
   }
 }
