@@ -5,7 +5,7 @@ pipeline {
     STG_APP_ENDPOINT = "https://obichooooo-staging-b1f04106fc86.herokuapp.com/"
     ID_DOCKERHUB = 'obichooooo'
     ID_GIT = 'obichoo'
-    IMAGE_NAME = 'alpinehelloworld'
+    IMAGE_NAME = 'ci-cd-projet-1'
     IMAGE_TAG = 'latest'
     PORT_EXPOSED = '5000'
     STAGING = "${ID_DOCKERHUB}-staging"
